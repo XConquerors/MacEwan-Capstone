@@ -18,7 +18,7 @@ namespace capstone.web.api.Data
                         LastName = "User",
                         Email = "admin@example.com",
                         Username = "admin",
-                        PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin-password"), // Securely hash passwords
+                        PasswordHash = BCrypt.Net.BCrypt.HashPassword("admin-           password"), // Securely hash passwords
                         Role = "Administrator"
                     });
 
