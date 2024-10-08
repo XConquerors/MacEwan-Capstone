@@ -23,7 +23,7 @@ namespace capstone.web.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetAll()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories.Where(a => !a.IsDeleted).ToListAsync();
         }
 
         // GET api/<CategoriesController>/5
@@ -45,6 +45,7 @@ namespace capstone.web.api.Controllers
         public async Task<ActionResult<Category>> PostCategory([FromBody] Category category)
         {
             category.CategoryId = 0;
+            category.IsDeleted = false;
 
             _context.Categories.Add(category);
 
@@ -106,12 +107,15 @@ namespace capstone.web.api.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
+
             if (category == null)
             {
                 NotFound();
             }
-            _context.Categories.Remove(category);
 
+            category.IsDeleted = true;
+            //_context.Categories.Remove(category);
+            _context.SaveChanges();
             return NoContent(); 
         }
 

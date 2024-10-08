@@ -38,6 +38,6 @@ export class CategoryService {
 
   // Search categories by term
   searchCategories(term: string): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.url}/search?query=${term}`);
+    return this.http.get<Category[]>(`${this.url}/search?term=${term}`);
   }
 }

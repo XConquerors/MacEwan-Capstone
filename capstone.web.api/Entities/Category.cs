@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace capstone.web.api.Entities
 {
@@ -10,5 +11,7 @@ namespace capstone.web.api.Entities
         public string CategoryName { get; set; }
 
         public string Description { get; set; }
+
+        public Boolean IsDeleted { get; set; } = false;
     }
 }
