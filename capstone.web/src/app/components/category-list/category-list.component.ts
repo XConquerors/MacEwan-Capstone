@@ -48,10 +48,14 @@ export class CategoryListComponent implements OnInit {
   searchCategories(term: string): void {
     if(term && term.trim() !== '') {
       this.categoryService.searchCategories(term).subscribe((data: Category[]) => {
-        this.categories = data.length > 0 ? data : []; 
+        this.categories = data; 
       });
     } else {
       this.getCategories(); // Reset to full category list if no search term
     }
+  }
+
+  goBack(){
+    this.router.navigate(["/"]);
   }
 }
