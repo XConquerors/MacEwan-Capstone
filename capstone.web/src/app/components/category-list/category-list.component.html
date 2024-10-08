@@ -1,7 +1,11 @@
 <div class="container">
-  <button (click)="addCategory()" class="btn btn-success mb-3">New Category</button>
-  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange(searchTerm)" placeholder="Search..." class="form-control mb-3">
-  
+  <div>
+    <button (click)="addCategory()" class="btn btn-success mb-3">New Category</button>
+    <button type="button" (click)="goBack()" class="btn btn-secondary mb-3 float-right">Back</button>
+  </div>
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange(searchTerm)" placeholder="Search..."
+    class="form-control mb-3">
+
   <table class="table">
     <thead>
       <tr>
