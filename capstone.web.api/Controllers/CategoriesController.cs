@@ -1,9 +1,9 @@
-﻿using capstone.web.api.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using capstone.web.api.Entities;
-using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using capstone.web.api.Data;
 
 namespace capstone.web.api.Controllers
 {
@@ -18,36 +18,82 @@ namespace capstone.web.api.Controllers
             _context = context;
         }
 
-        // GET: api/<CategoriesController>
+        // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
             return await _context.Categories.ToListAsync();
         }
 
-        // GET api/<CategoriesController>/5
+        // GET: api/Categories/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<Category>> GetCategory(int id)
         {
-            return "value";
+            var category = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryId == id && !c.IsDeleted);
+
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            return category;
         }
 
-        // POST api/<CategoriesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<CategoriesController>/5
+        // PUT: api/Categories/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> PutCategory(int id, Category category)
         {
+            if (id != category.CategoryId)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(category).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Categories.Any(e => e.CategoryId == id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
         }
 
-        // DELETE api/<CategoriesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // POST: api/Categories
+        [HttpPost]
+        public async Task<ActionResult<Category>> PostCategory(Category category)
         {
+            _context.Categories.Add(category);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryId }, category);
+        }
+
+        // DELETE: api/Categories/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            var category = await _context.Categories.FindAsync(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            // Soft delete implementation
+            category.IsDeleted = true;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
         }
     }
 }

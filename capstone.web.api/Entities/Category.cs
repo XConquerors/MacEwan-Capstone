@@ -10,5 +10,7 @@ namespace capstone.web.api.Entities
         public string CategoryName { get; set; }
 
         public string Description { get; set; }
+
+        public bool IsDeleted {  get; set; }
     }
 }

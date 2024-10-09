@@ -1,4 +1,6 @@
 ﻿using capstone.web.api.Entities;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace capstone.web.api.Data
 {
@@ -52,6 +54,20 @@ namespace capstone.web.api.Data
                     context.Categories.AddRange(categories);
                     context.SaveChanges();
                     Console.WriteLine("Data has been saved to the database.");
+                }
+                if (!context.Priorities.Any())
+                {
+                    // Seeding data for Priorities
+                    var priorities = new Priority[]
+                    {
+                        new Priority { PriorityName = "High", Description = "High importance", IsDeleted = false },
+                        new Priority { PriorityName = "Medium", Description = "Medium importance", IsDeleted = false },
+                        new Priority { PriorityName = "Low", Description = "Low importance", IsDeleted = false }
+                    };
+
+                    context.Priorities.AddRange(priorities);
+                    context.SaveChanges();
+                    Console.WriteLine("Priorities have been saved to the database.");
                 }
             }
             catch (Exception ex)
