@@ -128,7 +128,7 @@ namespace capstone.web.api.Controllers
                 return await _context.Categories.ToListAsync(); // Return all if no term provided
             }
 
-            var filteredCategories = await _context.Categories.Where(c => c.CategoryName.Contains(term) || c.Description.Contains(term)).ToListAsync();
+            var filteredCategories = await _context.Categories.Where(c => c.CategoryName.Contains(term) || c.Description.Contains(term)).Where(a => !a.IsDeleted).ToListAsync();
 
             return Ok(filteredCategories);
         }
