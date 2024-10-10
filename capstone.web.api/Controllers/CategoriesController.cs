@@ -3,6 +3,7 @@ using capstone.web.api.Entities;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Writers;
 using capstone.web.api.Data;
 
 namespace capstone.web.api.Controllers
@@ -22,61 +23,83 @@ namespace capstone.web.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            return await _context.Categories.Where(a => !a.IsDeleted).ToListAsync();
         }
 
         // GET: api/Categories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Category>> GetCategory(int id)
+        public async Task<ActionResult<Category>>GetCategory(int id)
         {
-            var category = await _context.Categories.FirstOrDefaultAsync(c => c.CategoryId == id && !c.IsDeleted);
+            var category = await _context.Categories.FindAsync(id);
 
             if (category == null)
             {
-                return NotFound();
+                NotFound();
             }
 
             return category;
         }
 
-        // PUT: api/Categories/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutCategory(int id, Category category)
+        // POST api/<CategoriesController>
+        [HttpPost]
+        public async Task<ActionResult<Category>> PostCategory([FromBody] Category category)
         {
-            if (id != category.CategoryId)
-            {
-                return BadRequest();
-            }
+            category.CategoryId = 0;
+            category.IsDeleted = false;
 
-            _context.Entry(category).State = EntityState.Modified;
+            _context.Categories.Add(category);
 
             try
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateException ex)
             {
-                if (!_context.Categories.Any(e => e.CategoryId == id))
+                if (CategoryExists(category.CategoryId))
                 {
-                    return NotFound();
+                    return Conflict();
                 }
                 else
                 {
-                    throw;
+                    throw ex;
                 }
             }
 
-            return NoContent();
+            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryId} , category);
         }
 
-        // POST: api/Categories
-        [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        private bool CategoryExists(int categoryId)
         {
-            _context.Categories.Add(category);
-            await _context.SaveChangesAsync();
+            return _context.Categories.Any(c => c.CategoryId == categoryId);
+        }
 
-            return CreatedAtAction(nameof(GetCategory), new { id = category.CategoryId }, category);
+        // PUT api/<CategoriesController>/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCategory(int id, [FromBody] Category     category)
+        {
+            if (id != category.CategoryId)
+            {
+                return BadRequest("Both the id's should match");
+            }
+            var existingCategory = _context.Categories.Find(id);
+
+            if (category == null)
+            {
+                NotFound();
+            }
+            existingCategory.CategoryName = category.CategoryName;
+            existingCategory.Description = category.Description;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException ex) { 
+                if(CategoryExists(existingCategory.CategoryId)) { return Conflict(); } else { throw ex; }
+            }
+
+            return NoContent();
+
         }
 
         // DELETE: api/Categories/5
@@ -84,16 +107,30 @@ namespace capstone.web.api.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             var category = await _context.Categories.FindAsync(id);
+
             if (category == null)
             {
-                return NotFound();
+                NotFound();
             }
 
-            // Soft delete implementation
             category.IsDeleted = true;
-            await _context.SaveChangesAsync();
+            //_context.Categories.Remove(category);
+            _context.SaveChanges();
+            return NoContent(); 
+        }
 
-            return NoContent();
+        [HttpGet("search")]
+
+        public async Task<ActionResult<IEnumerable<Category>>> SearchCategories(string term)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                return await _context.Categories.ToListAsync(); // Return all if no term provided
+            }
+
+            var filteredCategories = await _context.Categories.Where(c => c.CategoryName.Contains(term) || c.Description.Contains(term)).Where(a => !a.IsDeleted).ToListAsync();
+
+            return Ok(filteredCategories);
         }
     }
 }
