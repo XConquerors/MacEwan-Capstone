@@ -20,5 +20,38 @@
       "categoryName": "Education-STEM",
       "description": "Science Technology"
     }
+  ],
+  "priorities": [
+    {
+      "priorityId": 1,
+      "priorityName": "Critical",
+      "description": "Tasks that need immediate attention and resolution",
+      "priorityLevel": 1
+    },
+    {
+      "priorityId": 2,
+      "priorityName": "High",
+      "description": "Tasks that are  very important but not urgent",
+      "priorityLevel": 2
+    },
+    {
+      "priorityId": 3,
+      "priorityName": "Medium",
+      "description": "Tasks that  are  very  moderate importance and can be scheduled accordingly",
+      "priorityLevel": 3
+    },
+    {
+      "priorityId": 4,
+      "priorityName": "Low",
+      "description": "Tasks that are low in urgency and can be addressed last",
+      "priorityLevel": 4
+    },
+    {
+      "priorityId": 5,
+      "categoryName": "Backlog",
+      "description": "Tasks that are on hold or will be addressed at a later time",
+      "priorityLevel": 5
+    }
+    
   ]
 }
