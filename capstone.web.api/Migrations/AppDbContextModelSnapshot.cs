@@ -60,6 +60,9 @@ namespace capstone.web.api.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int>("PriorityLevel")
+                        .HasColumnType("int");
+
                     b.Property<string>("PriorityName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

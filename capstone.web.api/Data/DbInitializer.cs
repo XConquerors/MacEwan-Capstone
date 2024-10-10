@@ -60,9 +60,11 @@ namespace capstone.web.api.Data
                     // Seeding data for Priorities
                     var priorities = new Priority[]
                     {
-                        new Priority { PriorityName = "High", Description = "High importance", IsDeleted = false },
-                        new Priority { PriorityName = "Medium", Description = "Medium importance", IsDeleted = false },
-                        new Priority { PriorityName = "Low", Description = "Low importance", IsDeleted = false }
+                        new Priority{ PriorityName="Critical", Description="Immediate attention and resolution", PriorityLevel=1},
+                       new Priority{  PriorityName="High", Description="very important not urgent", PriorityLevel=2},
+                      new Priority{ PriorityName="Medium", Description=" moderate important and can be scheduled accordingly", PriorityLevel=3},
+                      new Priority{ PriorityName="Low", Description=" low in urgency and can be addressed last", PriorityLevel=4},
+                      new Priority{ PriorityName="Backlog", Description=" on hold and can be done later", PriorityLevel=5}
                     };
 
                     context.Priorities.AddRange(priorities);
