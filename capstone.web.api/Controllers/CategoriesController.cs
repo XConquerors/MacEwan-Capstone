@@ -1,10 +1,10 @@
-﻿using capstone.web.api.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using capstone.web.api.Entities;
-using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Writers;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using capstone.web.api.Data;
 
 namespace capstone.web.api.Controllers
 {
@@ -19,14 +19,14 @@ namespace capstone.web.api.Controllers
             _context = context;
         }
 
-        // GET: api/<CategoriesController>
+        // GET: api/Categories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
         {
             return await _context.Categories.Where(a => !a.IsDeleted).ToListAsync();
         }
 
-        // GET api/<CategoriesController>/5
+        // GET: api/Categories/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>>GetCategory(int id)
         {
@@ -102,7 +102,7 @@ namespace capstone.web.api.Controllers
 
         }
 
-        // DELETE api/<CategoriesController>/5
+        // DELETE: api/Categories/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
