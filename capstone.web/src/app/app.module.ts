@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import { PriorityComponent } from './components/priority/priority.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CategoryListComponent } from './components/category-list/category-list.
     HeaderComponent,
     LoginComponent,
     CategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+    PriorityComponent
   ],
   imports: [
     BrowserModule,
