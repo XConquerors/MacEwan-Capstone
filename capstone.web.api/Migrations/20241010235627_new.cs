@@ -5,7 +5,7 @@
 namespace capstone.web.api.Migrations
 {
     /// <inheritdoc />
-    public partial class two : Migration
+    public partial class @new : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
