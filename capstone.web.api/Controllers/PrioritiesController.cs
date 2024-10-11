@@ -38,5 +38,35 @@ namespace capstone.web.api.Controllers
 
             return priority;
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeletePriority(int id)
+        {
+            var priority = await _context.Priorities.FindAsync(id);
+
+            if (priority == null)
+            {
+                NotFound();
+            }
+
+            priority.IsDeleted = true;
+            //_context.Categories.Remove(category);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpGet("search")]
+
+        public async Task<ActionResult<IEnumerable<Priority>>> SearchPriorities(string term)
+        {
+            if (string.IsNullOrEmpty(term))
+            {
+                return await _context.Priorities.ToListAsync(); // Return all if no term provided
+            }
+
+            var filteredPriorities = await _context.Priorities.Where(c => c.PriorityName.Contains(term) || c.Description.Contains(term)).Where(a => !a.IsDeleted).ToListAsync();
+
+            return Ok(filteredPriorities);
+        }
     }
 }
