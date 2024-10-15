@@ -68,5 +68,67 @@ namespace capstone.web.api.Controllers
 
             return Ok(filteredPriorities);
         }
+
+        // POST: api/Priorities
+        [HttpPost]
+        public async Task<ActionResult<Priority>> AddNewPriority(Priority priority)
+        {
+            if (priority == null)
+            {
+                return BadRequest("Priority cannot be null.");
+            }
+
+            _context.Priorities.Add(priority);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetCategory), new { id = priority.Id }, priority);
+        }
+
+        // PUT: api/Priorities/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdatePriority(int id, Priority priority)
+        {
+            if (id != priority.PriorityId)
+            {
+                return BadRequest("Priority ID mismatch.");
+            }
+
+            var existingPriority = await _context.Priorities.FindAsync(id);
+            if (existingPriority == null)
+            {
+                return NotFound();
+            }
+
+            existingPriority.PriorityName = priority.PriorityName;
+            existingPriority.Description = priority.Description;
+            existingPriority.PriorityLevel = priority.PriorityLevel;
+            existingPriority.IsDeleted = priority.IsDeleted;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!PriorityExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent(); // or return Ok(existingPriority) if you want to return the updated entity
+        }
+        private bool PriorityExists(int id)
+        {
+            return _context.Priorities.Any(e => e.PriorityId == id);
+        }
+
+
+
     }
+
 }

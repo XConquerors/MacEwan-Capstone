@@ -12,6 +12,13 @@ namespace capstone.web.api.Entities
 
         public string Description { get; set; }
 
+
         public Boolean IsDeleted { get; set; } = false;
+
+        public DateTime DateCreated { get; set; }
+
+        public bool IsDelated { get; set; }
+
     }
 }
+
