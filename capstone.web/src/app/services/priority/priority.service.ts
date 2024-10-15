@@ -12,7 +12,7 @@ export class priorityService {
   constructor(private http: HttpClient) {}
 
   // Fetch all priority (no pagination)
-  getCategories(): Observable<Priority[]> {
+  getPriority(): Observable<Priority[]> {
     return this.http.get<Priority[]>(`${this.url}`);
   }
 
