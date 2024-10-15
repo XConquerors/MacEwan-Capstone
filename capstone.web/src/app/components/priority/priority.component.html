@@ -1,0 +1,15 @@
+<div class="container"></div>
+    <form (ngSubmit)="savePriority()">
+        <div class="form-group">
+            <label for="priorityName">Name</label>
+            <input [(ngModel)]="priority.priorityName" class="form-control" id="priorityName" name="priorityName" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input [(ngModel)]="priority.description" class="'form-control" id="description" name="description" required>
+        </div>
+        <button type="submit" class="btn btn-success col-xs-2 margin-left">Save</button>
+        <button type="button" (click)="deletePriority()" class="btn btn-danger col-xs-2 ml-lg-3" *ngIf="priority.priorityId">Delete</button>
+        <button type="button" (click)="goBack()" class="btn btn-secondary col-xs-2 ml-lg-3">Back</button>
+    </form>
+</div>
