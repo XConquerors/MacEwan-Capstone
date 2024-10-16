@@ -20,7 +20,11 @@ import { PriorityListComponent } from './components/priority-list/priority-list.
     LoginComponent,
     CategoryComponent,
     CategoryListComponent,
-    PriorityComponent
+
+    PriorityComponent,
+
+    PriorityListComponent,
+
   ],
   imports: [
     BrowserModule,
