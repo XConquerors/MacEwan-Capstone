@@ -1,0 +1,24 @@
+{
+  "categories": [
+    {
+      "categoryId": 1,
+      "categoryName": "Tech-AI",
+      "description": "Machine Learning"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "Entertainment-TV Shows",
+      "description": "Binge Series"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "Tech-Cybersecurity",
+      "description": "Data Protection"
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "Education-STEM",
+      "description": "Science Technology"
+    }
+  ]
+}
