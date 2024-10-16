@@ -14,14 +14,14 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr *ngFor="let Priority of categories">
-          <td>{{ Priority.PriorityName }}</td>
-          <td>{{ Priority.description }}</td>
+      <table>
+        <tr *ngFor="let priority of Priorities">
+          <td>{{ priority.priorityName }}</td>
+          <td>{{ priority.description }}</td>
           <td>
-            <button (click)="viewPriority(Priority.PriorityId)" class="btn btn-primary">View</button>
+            <button (click)="viewPriority(priority.priorityId)" class="btn btn-primary">View</button>
           </td>
         </tr>
-      </tbody>
+      </table>
     </table>
   </div>
