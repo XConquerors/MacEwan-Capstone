@@ -81,7 +81,7 @@ namespace capstone.web.api.Controllers
             _context.Priorities.Add(priority);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCategory), new { id = priority.Id }, priority);
+            return CreatedAtAction(nameof(GetCategory), new { id = priority.PriorityId }, priority);
         }
 
         // PUT: api/Priorities/5

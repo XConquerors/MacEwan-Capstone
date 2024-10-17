@@ -11,6 +11,5 @@ namespace capstone.web.api.Entities
         public string Description { get; set; }
         public int PriorityLevel { get; set; }
         public bool IsDeleted{ get; set; } = false;
-        public int Id { get; internal set; }
     }
 }
