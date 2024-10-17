@@ -1,0 +1,27 @@
+<div class="container">
+    <div>
+      <button (click)="addPriority()" class="btn btn-success mb-3">New Priority</button>
+      <button type="button" (click)="goBack()" class="btn btn-secondary mb-3 float-right">Back</button>
+    </div>
+    <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange(searchTerm)" placeholder="Search..."
+      class="form-control mb-3">
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <table>
+        <tr *ngFor="let priority of Priorities">
+          <td>{{ priority.priorityName }}</td>
+          <td>{{ priority.description }}</td>
+          <td>
+            <button (click)="viewPriority(priority.priorityId)" class="btn btn-primary">View</button>
+          </td>
+        </tr>
+      </table>
+    </table>
+  </div>

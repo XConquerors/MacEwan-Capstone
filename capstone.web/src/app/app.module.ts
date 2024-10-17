@@ -10,13 +10,23 @@ import { FormsModule } from '@angular/forms';
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 
+import { PriorityComponent } from './components/priority/priority.component';
+
+import { PriorityListComponent } from './components/priority-list/priority-list.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     LoginComponent,
     CategoryComponent,
-    CategoryListComponent
+    CategoryListComponent,
+
+    PriorityComponent,
+
+    PriorityListComponent,
+
   ],
   imports: [
     BrowserModule,
