@@ -20,14 +20,14 @@ namespace capstone.web.api.Controllers
 
         // GET: api/Priorities
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Priority>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Priority>>> GetPriorities()
         {
             return await _context.Priorities.Where(a => !a.IsDeleted).ToListAsync();
         }
 
         // GET: api/Priorities/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Priority>> GetCategory(int id)
+        public async Task<ActionResult<Priority>> GetPriority(int id)
         {
             var priority = await _context.Priorities.FindAsync(id);
 
@@ -81,7 +81,7 @@ namespace capstone.web.api.Controllers
             _context.Priorities.Add(priority);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetCategory), new { id = priority.Id }, priority);
+            return CreatedAtAction(nameof(GetPriority), new { id = priority.PriorityId }, priority);
         }
 
         // PUT: api/Priorities/5
