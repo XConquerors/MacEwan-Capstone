@@ -10,7 +10,14 @@ namespace capstone.web.api.Entities
         public string PriorityName { get; set; }
         public string Description { get; set; }
         public int PriorityLevel { get; set; }
+
+        public ICollection<ToDo> Todos { get; set; }
+
         public bool IsDeleted{ get; set; } = false;
-        public int Id { get; internal set; }
+
+        public Priority()
+        {
+            Todos = new HashSet<ToDo>();
+        }
     }
 }
