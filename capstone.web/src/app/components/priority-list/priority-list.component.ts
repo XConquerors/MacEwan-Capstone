@@ -38,11 +38,11 @@ export class PriorityListComponent implements OnInit {
   }
 
   viewPriority(id: number) {
-    this.router.navigate(["/Priority", id]);
+    this.router.navigate(["/priority", id]);
   }
 
   addPriority() {
-    this.router.navigate(["/Priority"]);
+    this.router.navigate(["/priority"]);
   }
 
   searchCategories(term: string): void {

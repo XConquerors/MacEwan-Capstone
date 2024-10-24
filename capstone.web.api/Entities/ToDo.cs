@@ -12,12 +12,9 @@ namespace capstone.web.api.Entities
         public string Description { get; set; }
 
         public int CategoryId { get; set; }
-
-        public  Category category { get; set; }
+        public Category category { get; set; }
 
         public int PriorityId { get; set; }
-
         public Priority Priority { get; set; }
-
     }
 }
