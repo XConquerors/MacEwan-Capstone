@@ -11,19 +11,14 @@ import { PriorityListComponent } from './components/priority-list/priority-list.
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  {
-    path: '',
-    component: HeaderComponent,
-    canActivate: [AuthGuard],
-    children: [
-      { path: 'categories', component: CategoryListComponent },
-      { path: 'category/:id', component: CategoryComponent },
-      { path: 'category', component: CategoryComponent },
-      { path: 'priorities', component: PriorityListComponent },
-      { path: 'priority/:id', component: PriorityComponent },
-      { path: 'priority', component: PriorityComponent },
-    ]
-  },
+  { path: '', component: HeaderComponent, canActivate: [AuthGuard] }, // Example default page
+  { path: "categories", component : CategoryListComponent},
+  { path: "category/:id", component: CategoryComponent },
+  { path: "category", component: CategoryComponent},
+  { path: "priorities", component : PriorityListComponent},
+  { path: "priority/:id", component: PriorityComponent },
+  { path: "priority", component: PriorityComponent},
+  { path: "", redirectTo: "/categories", pathMatch: "full" },
   { path: '**', redirectTo: '' }
 ];
 
