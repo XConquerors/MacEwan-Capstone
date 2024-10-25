@@ -53,5 +53,34 @@
       "priorityLevel": 5
     }
     
+  ],
+  "todos": [
+    {
+      "todoId": 1,
+      "name": "Implement Authentication",
+      "description": "Set up user registration and login functionality.",
+      "categoryId" : 1,
+      "priorityId": 2
+      
+    },
+    {
+      "todoId": 2,
+      "name": "Creating Marketing Plan",
+      "description": "Develop a comprehensive marketing strategy.",
+      "categoryId" : 3,
+      "priorityId": 2
+   
+    },
+    {
+      "todoId": 3,
+      "name": "Design Database Schema",
+      "description": "Outline the database structure for the application.",
+      "categoryId" : 5,
+      "priorityId": 3
+    }
+    
+    
   ]
 }
+
+
