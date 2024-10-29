@@ -36,6 +36,22 @@ namespace capstone.web.api.Controllers
             }
 
             return toDo;
+
+        }
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ToDo>>> SearchToDos(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return BadRequest("Search query cannot be empty.");
+            }
+
+            var results = await _context.ToDos
+                .Where(t => t.Title.Contains(query) || t.Description.Contains(query))
+                .ToListAsync();
+
+            return results;
         }
     }
 }
+
