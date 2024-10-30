@@ -79,6 +79,37 @@ namespace capstone.web.api.Migrations
                     b.ToTable("Priorities");
                 });
 
+            modelBuilder.Entity("capstone.web.api.Entities.ToDo", b =>
+                {
+                    b.Property<int>("ToDoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ToDoId"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PriorityId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ToDoId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("PriorityId");
+
+                    b.ToTable("ToDo");
+                });
+
             modelBuilder.Entity("capstone.web.api.User", b =>
                 {
                     b.Property<int>("Id")
@@ -114,6 +145,35 @@ namespace capstone.web.api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("capstone.web.api.Entities.ToDo", b =>
+                {
+                    b.HasOne("capstone.web.api.Entities.Category", "category")
+                        .WithMany("Todos")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("capstone.web.api.Entities.Priority", "Priority")
+                        .WithMany("Todos")
+                        .HasForeignKey("PriorityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Priority");
+
+                    b.Navigation("category");
+                });
+
+            modelBuilder.Entity("capstone.web.api.Entities.Category", b =>
+                {
+                    b.Navigation("Todos");
+                });
+
+            modelBuilder.Entity("capstone.web.api.Entities.Priority", b =>
+                {
+                    b.Navigation("Todos");
                 });
 #pragma warning restore 612, 618
         }
