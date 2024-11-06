@@ -76,7 +76,7 @@
       "name": "Design Database Schema",
       "description": "Outline the database structure for the application.",
       "categoryId" : 5,
-      "priorityId": 3
+      "priorityId": 3 
     }
     
     

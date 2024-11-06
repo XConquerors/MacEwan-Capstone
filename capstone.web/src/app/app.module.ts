@@ -11,6 +11,8 @@ import { CategoryComponent } from './components/category/category.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { PriorityComponent } from './components/priority/priority.component';
 import { PriorityListComponent } from './components/priority-list/priority-list.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoComponent } from './components/todo/todo.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { PriorityListComponent } from './components/priority-list/priority-list.
     PriorityComponent,
 
     PriorityListComponent,
+      TodoListComponent,
+      TodoComponent,
 
   ],
   imports: [
