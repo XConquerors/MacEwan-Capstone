@@ -36,8 +36,8 @@ namespace capstone.web.api.Controllers
             }
 
             return toDo;
-            //Just an example
         }
+
         [HttpGet("search")]
         public async Task<ActionResult<IEnumerable<ToDo>>> SearchToDos(string query)
         {
@@ -47,69 +47,33 @@ namespace capstone.web.api.Controllers
             }
 
             var results = await _context.ToDos
-                .Where(t => t.Title.Contains(query) || t.Description.Contains(query))
+                .Where(t => (t.Name != null && t.Name.Contains(query)) ||
+                             (t.Description != null && t.Description.Contains(query)))
                 .ToListAsync();
 
             return results;
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteToDo(int id)
+        [HttpPost]
+        public async Task<ActionResult<ToDo>> AddToDo(ToDo newToDo)
         {
-            var todo = await _context.ToDos.FindAsync(id);
-
-            if (todo == null)
+            if (newToDo == null)
             {
-                NotFound();
+                return BadRequest("ToDo item cannot be null.");
             }
 
-            todo.IsDeleted = true;
-            //_context.ToDo.Remove(todo);
-            _context.SaveChanges();
-            return NoContent();
-        }
-
-        // PUT: api/ToDos/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateToDo(int id, ToDo todo)
-        {
-            if (id != todo.ToDoId)
+           
+            if (string.IsNullOrWhiteSpace(newToDo.Name))
             {
-                return BadRequest("ToDo ID mismatch.");
+                return BadRequest("Name is required.");
             }
 
-            var existingToDo = await _context.ToDos.FindAsync(id);
-            if (existingToDo == null)
-            {
-                return NotFound();
-            }
+           
+            _context.ToDos.Add(newToDo);
+            await _context.SaveChangesAsync();
 
-            existingToDo.Name = todo.Name;
-            existingToDo.Description = todo.Description;
-            existingToDo.IsDeleted = todo.IsDeleted;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ToDoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent(); 
-        }
-        private bool ToDoExists(int id)
-        {
-            return _context.ToDos.Any(e => e.ToDoId == id);
+            
+            return CreatedAtAction(nameof(GetToDo), new { id = newToDo.ToDoId }, newToDo);
         }
     }
 }
-
