@@ -8,6 +8,8 @@ import { CategoryComponent } from './components/category/category.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
 import { PriorityComponent } from './components/priority/priority.component';
 import { PriorityListComponent } from './components/priority-list/priority-list.component';
+import { TodoComponent } from './components/todo/todo.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +20,9 @@ const routes: Routes = [
   { path: "priorities", component : PriorityListComponent},
   { path: "priority/:id", component: PriorityComponent },
   { path: "priority", component: PriorityComponent},
+  { path: "todo", component : TodoListComponent},
+  { path: "todo/:id", component: TodoComponent },
+  { path: "todo", component: TodoComponent},
   { path: "", redirectTo: "/categories", pathMatch: "full" },
   { path: '**', redirectTo: '' }
 ];
