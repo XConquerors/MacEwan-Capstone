@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace capstone.web.api.Entities
 {
-
     public class Priority
     {
         [Key]
@@ -13,7 +13,7 @@ namespace capstone.web.api.Entities
 
         public ICollection<ToDo> Todos { get; set; }
 
-        public bool IsDeleted{ get; set; } = false;
+        public bool IsDeleted { get; set; } = false;
 
         public Priority()
         {
