@@ -1,5 +1,5 @@
 export interface ToDo{
-    todoId : number;
+    toDoId : number;
     name : string;
     description : string;
     categoryId : number;

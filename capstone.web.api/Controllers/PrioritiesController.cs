@@ -56,7 +56,6 @@ namespace capstone.web.api.Controllers
         }
 
         [HttpGet("search")]
-
         public async Task<ActionResult<IEnumerable<Priority>>> SearchPriorities(string term)
         {
             if (string.IsNullOrEmpty(term))
