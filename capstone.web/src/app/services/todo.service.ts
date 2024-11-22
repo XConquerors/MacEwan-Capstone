@@ -8,7 +8,7 @@ import { ToDo } from '../models/todo';
   providedIn: 'root'
 })
 export class TodoService {
-  private url = "https://localhost:7197/api/todos"; 
+  private url = "https://localhost:7197/api/ToDo"; 
 
   constructor(private http: HttpClient) {}
 
@@ -29,12 +29,12 @@ export class TodoService {
 
   // Update an existing ToDo
   updateTodo(todo: ToDo): Observable<ToDo> {
-    return this.http.put<ToDo>(`${this.url}/${todo.todoId}`, todo);
+    return this.http.put<ToDo>(`${this.url}/${todo.toDoId}`, todo);
   }
 
   // Delete a ToDo by ID
-  deleteTodo(todoId: number): Observable<void> {
-    return this.http.delete<void>(`${this.url}/${todoId}`);
+  deleteTodo(toDoId: number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${toDoId}`);
   }
 
   // Search ToDos by term

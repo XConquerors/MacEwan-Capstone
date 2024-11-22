@@ -17,7 +17,7 @@
             <input [(ngModel)]="todo.priorityId" class="form-control" id="priorityId" name="priorityId" type="number" required>
         </div>
         <button type="submit" class="btn btn-success col-xs-2 margin-left">Save</button>
-        <button type="button" (click)="deleteToDo()" class="btn btn-danger col-xs-2 ml-lg-3" *ngIf="todo.todoId">Delete</button>
+        <button type="button" (click)="deleteToDo()" class="btn btn-danger col-xs-2 ml-lg-3" *ngIf="todo.toDoId">Delete</button>
         <button type="button" (click)="goBack()" class="btn btn-secondary col-xs-2 ml-lg-3">Back</button>
     </form>
 </div>

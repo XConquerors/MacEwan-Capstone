@@ -21,7 +21,7 @@ namespace capstone.web.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDo>>> GetToDos()
         {
-            return await _context.ToDos.ToListAsync();
+            return await _context.ToDos.Where(a => !a.IsDeleted).ToListAsync();
         }
 
         // GET: api/ToDo/5

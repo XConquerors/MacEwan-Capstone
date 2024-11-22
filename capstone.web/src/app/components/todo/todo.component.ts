@@ -11,7 +11,7 @@ import { TodoService } from '../../services/todo.service';
 })
 export class TodoComponent implements OnInit {
   todo: ToDo = {
-    todoId: 0,
+    toDoId: 0,
     name: "",
     description: "",
     categoryId: 0,
@@ -47,7 +47,7 @@ export class TodoComponent implements OnInit {
   }
 
   saveToDo() {
-    if (this.todo.todoId) {
+    if (this.todo.toDoId) {
       this.todoService.updateTodo(this.todo).subscribe(() => this.goBack());
     } else {
       this.todoService.addTodo(this.todo).subscribe(() => this.goBack());
@@ -55,8 +55,8 @@ export class TodoComponent implements OnInit {
   }
 
   deleteToDo() {
-    if (this.todo.todoId) {
-      this.todoService.deleteTodo(this.todo.todoId).subscribe(() => this.goBack());
+    if (this.todo.toDoId) {
+      this.todoService.deleteTodo(this.todo.toDoId).subscribe(() => this.goBack());
     }
   }
 
