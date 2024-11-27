@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: "priorities", component : PriorityListComponent},
   { path: "priority/:id", component: PriorityComponent },
   { path: "priority", component: PriorityComponent},
-  { path: "todo", component : TodoListComponent},
+  { path: "todos", component : TodoListComponent},
   { path: "todo/:id", component: TodoComponent },
   { path: "todo", component: TodoComponent},
   { path: "", redirectTo: "/categories", pathMatch: "full" },

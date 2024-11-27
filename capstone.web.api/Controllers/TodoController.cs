@@ -21,7 +21,7 @@ namespace capstone.web.api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDo>>> GetToDos()
         {
-            return await _context.ToDos.ToListAsync();
+            return await _context.ToDos.Where(a => !a.IsDeleted).ToListAsync();
         }
 
         // GET: api/ToDo/5
@@ -38,22 +38,57 @@ namespace capstone.web.api.Controllers
             return toDo;
         }
 
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<ToDo>>> SearchToDos(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return BadRequest("Search query cannot be empty.");
+            }
+
+            var results = await _context.ToDos
+                .Where(t => (t.Name != null && t.Name.Contains(query)) ||
+                             (t.Description != null && t.Description.Contains(query)))
+                .ToListAsync();
+
+            return results;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ToDo>> AddToDo(ToDo newToDo)
+        {
+            if (newToDo == null)
+            {
+                return BadRequest("ToDo item cannot be null.");
+            }
+
+           
+            if (string.IsNullOrWhiteSpace(newToDo.Name))
+            {
+                return BadRequest("Name is required.");
+            }
+
+           
+            _context.ToDos.Add(newToDo);
+            await _context.SaveChangesAsync();
+
+            
+            return CreatedAtAction(nameof(GetToDo), new { id = newToDo.ToDoId }, newToDo);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteToDo(int id)
         {
             var todo = await _context.ToDos.FindAsync(id);
-
             if (todo == null)
             {
                 NotFound();
             }
-
             todo.IsDeleted = true;
             //_context.ToDo.Remove(todo);
             _context.SaveChanges();
             return NoContent();
         }
-
         // PUT: api/ToDos/5
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateToDo(int id, ToDo todo)
@@ -62,17 +97,14 @@ namespace capstone.web.api.Controllers
             {
                 return BadRequest("ToDo ID mismatch.");
             }
-
             var existingToDo = await _context.ToDos.FindAsync(id);
             if (existingToDo == null)
             {
                 return NotFound();
             }
-
             existingToDo.Name = todo.Name;
             existingToDo.Description = todo.Description;
             existingToDo.IsDeleted = todo.IsDeleted;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -88,8 +120,7 @@ namespace capstone.web.api.Controllers
                     throw;
                 }
             }
-
-            return NoContent(); 
+            return NoContent();
         }
         private bool ToDoExists(int id)
         {
