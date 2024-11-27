@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ToDo } from '../../models/todo';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TodoService } from '../../services/todo.service';
+import { CategoryService } from '../../services/category/category.service';
+import { priorityService } from '../../services/priority/priority.service';
 
 
 @Component({
@@ -20,12 +22,16 @@ export class TodoComponent implements OnInit {
 
   todos: ToDo[] = [];
   id: number | null = null;
+  categories: any[] = [];
+  priorities: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private todoService: TodoService
-  ) {}
+    private todoService: TodoService,
+    private categoryService: CategoryService,
+    private priorityService: priorityService
+  ) { }
 
   ngOnInit() {
     const snapshot = this.route.snapshot;
@@ -43,6 +49,10 @@ export class TodoComponent implements OnInit {
           }
         );
       }
+      this.categoryService.getCategories().subscribe(data => {this.categories = data });
+
+      this.priorityService.getPriority().subscribe(data => {this.priorities = data });
+      
     }
   }
 
