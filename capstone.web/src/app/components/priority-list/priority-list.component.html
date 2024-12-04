@@ -6,7 +6,7 @@
     <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange(searchTerm)" placeholder="Search..."
       class="form-control mb-3">
   
-    <table class="table">
+    <table class="table ">
       <thead>
         <tr>
           <th>Name</th>
@@ -14,7 +14,7 @@
           <th>Actions</th>
         </tr>
       </thead>
-      <table>
+      <tbody>
         <tr *ngFor="let priority of Priorities">
           <td>{{ priority.priorityName }}</td>
           <td>{{ priority.description }}</td>
@@ -22,6 +22,6 @@
             <button (click)="viewPriority(priority.priorityId)" class="btn btn-primary">View</button>
           </td>
         </tr>
-      </table>
+      </tbody>
     </table>
   </div>
