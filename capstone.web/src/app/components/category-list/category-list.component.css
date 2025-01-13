@@ -1,0 +1,12 @@
+.pagination-controls {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .pagination-controls button {
+    margin: 0 10px;
+    padding: 5px 10px;
+  }
+  

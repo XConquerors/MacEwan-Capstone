@@ -1,0 +1,27 @@
+<div class="container">
+  <div>
+    <button (click)="addToDo()" class="btn btn-success mb-3">New Undecided</button>
+    <button type="button" (click)="goBack()" class="btn btn-secondary mb-3 float-right">Back</button>
+  </div>
+  <input type="text" [(ngModel)]="searchTerm" (input)="onSearchTermChange(searchTerm)" placeholder="Search..."
+    class="form-control mb-3" />
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos">
+        <td>{{ todo.name }}</td>
+        <td>{{ todo.description }}</td>
+        <td>
+          <button (click)="viewToDo(todo.toDoId)" class="btn btn-primary">View</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

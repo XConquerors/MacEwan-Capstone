@@ -1,0 +1,31 @@
+<div class="container">
+    <form (ngSubmit)="saveToDo()">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input [(ngModel)]="todo.name" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input [(ngModel)]="todo.description" class="form-control" id="description" name="description" required>
+        </div>
+        <div class="form-group">
+            <label for="categoryId">Category ID</label>
+            <!-- <input [(ngModel)]="todo.categoryId" class="form-control" id="categoryId" name="categoryId" type="number" required> -->
+            <select class="form-control" id="categoryId" [(ngModel)]="todo.categoryId" name="categoryId" required>
+                <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="priorityId">Priority ID</label>
+            <!-- <input [(ngModel)]="todo.priorityId" class="form-control" id="priorityId" name="priorityId" type="number" required> -->
+            <select class="form-control" id="priorityId" [(ngModel)]="todo.priorityId" name="priorityId" required>
+                <option *ngFor="let priority of priorities" [value]="priority.priorityId">{{ priority.priorityName }}
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success col-xs-2 margin-left">Save</button>
+        <button type="button" (click)="deleteToDo()" class="btn btn-danger col-xs-2 ml-lg-3" *ngIf="todo.toDoId">Delete</button>
+        <button type="button" (click)="goBack()" class="btn btn-secondary col-xs-2 ml-lg-3">Back</button>
+    </form>
+</div>

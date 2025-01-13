@@ -1,0 +1,86 @@
+{
+  "categories": [
+    {
+      "categoryId": 1,
+      "categoryName": "Tech-AI",
+      "description": "Machine Learning"
+    },
+    {
+      "categoryId": 2,
+      "categoryName": "Entertainment-TV Shows",
+      "description": "Binge Series"
+    },
+    {
+      "categoryId": 3,
+      "categoryName": "Tech-Cybersecurity",
+      "description": "Data Protection"
+    },
+    {
+      "categoryId": 4,
+      "categoryName": "Education-STEM",
+      "description": "Science Technology"
+    }
+  ],
+  "priorities": [
+    {
+      "priorityId": 1,
+      "priorityName": "Critical",
+      "description": "Tasks that need immediate attention and resolution",
+      "priorityLevel": 1
+    },
+    {
+      "priorityId": 2,
+      "priorityName": "High",
+      "description": "Tasks that are  very important but not urgent",
+      "priorityLevel": 2
+    },
+    {
+      "priorityId": 3,
+      "priorityName": "Medium",
+      "description": "Tasks that  are  very  moderate importance and can be scheduled accordingly",
+      "priorityLevel": 3
+    },
+    {
+      "priorityId": 4,
+      "priorityName": "Low",
+      "description": "Tasks that are low in urgency and can be addressed last",
+      "priorityLevel": 4
+    },
+    {
+      "priorityId": 5,
+      "categoryName": "Backlog",
+      "description": "Tasks that are on hold or will be addressed at a later time",
+      "priorityLevel": 5
+    }
+    
+  ],
+  "todos": [
+    {
+      "todoId": 1,
+      "name": "Implement Authentication",
+      "description": "Set up user registration and login functionality.",
+      "categoryId" : 1,
+      "priorityId": 2
+      
+    },
+    {
+      "todoId": 2,
+      "name": "Creating Marketing Plan",
+      "description": "Develop a comprehensive marketing strategy.",
+      "categoryId" : 3,
+      "priorityId": 2
+   
+    },
+    {
+      "todoId": 3,
+      "name": "Design Database Schema",
+      "description": "Outline the database structure for the application.",
+      "categoryId" : 5,
+      "priorityId": 3 
+    }
+    
+    
+  ]
+}
+
+

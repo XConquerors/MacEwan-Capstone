@@ -1,0 +1,15 @@
+<div class="container">
+    <form (ngSubmit)="saveCategory()">
+        <div class="form-group">
+            <label for="categoryName">Name</label>
+            <input [(ngModel)]="category.categoryName" class="form-control" id="categoryName" name="categoryName" required>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input [(ngModel)]="category.description" class="'form-control" id="description" name="description" required>
+        </div>
+        <button type="submit" class="btn btn-success col-xs-2 margin-left">Save</button>
+        <button type="button" (click)="deleteCategory()" class="btn btn-danger col-xs-2 ml-lg-3" *ngIf="category.categoryId">Delete</button>
+        <button type="button" (click)="goBack()" class="btn btn-secondary col-xs-2 ml-lg-3">Back</button>
+    </form>
+</div>

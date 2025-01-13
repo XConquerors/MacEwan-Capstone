@@ -16,6 +16,7 @@ namespace capstone.web.api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddControllers();
 
             // Retrieve the secret key from configuration
             var secretKey = builder.Configuration["JwtConfig:Secret"];
@@ -71,15 +72,28 @@ namespace capstone.web.api
             {
                 var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
                 db.Database.Migrate();
-                SeedDatabase(db);
+                //SeedDatabase(db);
+                try
+                {
+                    DbInitializer.Initialize(db);  // Seed the database
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("An error occurred while seeding the database: " + ex.ToString());
+                }
             }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Registration System API V1");
+                });
             }
+
+           
 
             // Use CORS with the wide-open policy
             app.UseCors("OpenCorsPolicy");
@@ -91,6 +105,7 @@ namespace capstone.web.api
             app.UseAuthorization();
 
             app.MapUserEndpoints();
+            app.MapControllers();
 
             //var summaries = new[]
             //{

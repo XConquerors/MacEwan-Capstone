@@ -7,12 +7,28 @@ import { AuthInterceptor } from './core/security/auth.interceptor';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
+import { CategoryComponent } from './components/category/category.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
+import { PriorityComponent } from './components/priority/priority.component';
+import { PriorityListComponent } from './components/priority-list/priority-list.component';
+import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { TodoComponent } from './components/todo/todo.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    CategoryComponent,
+    CategoryListComponent,
+
+    PriorityComponent,
+
+    PriorityListComponent,
+      TodoListComponent,
+      TodoComponent,
+
   ],
   imports: [
     BrowserModule,
